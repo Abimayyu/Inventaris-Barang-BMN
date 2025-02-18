@@ -48,7 +48,7 @@
                         </td>
     
                          
-                        <td>{{ $p->tanggal_distribusi }}</td>
+                        <td>{{ \Carbon\Carbon::parse($p->tanggal_distribusi)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
                         <td>
                           <ul>
                             @foreach ($p->detailDistribusi as $d)

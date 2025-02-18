@@ -41,11 +41,11 @@
                           {{ $no++ }}
                         </td>
                         <td>{{ $p->nama_peminjam }}</td>
-                        <td>{{ $p->tgl_peminjaman }}</td>
+                        <td>{{ \Carbon\Carbon::parse($p->tgl_peminjaman)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
                         @if ($p->tgl_pengembalian == NULL)
                         <td>Belum Dikembalikan</td>
                         @else
-                        <td>{{ $p->tgl_pengembalian }}</td>
+                        <td>{{ \Carbon\Carbon::parse($p->tgl_pengembalian)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
                         @endif
                       
                         <td>

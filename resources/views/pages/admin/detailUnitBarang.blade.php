@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="container">
                         <table class="table table-bordered">
-                                
+                                 
                             <tr>
                                 <th width="30%" class="bg-light">Kode Barang</th>
                                 <td>{{ $data_barang->kode_barang }}</td>
@@ -40,9 +40,10 @@
                                 <td>{{ $data_barang->dataBarang->tahun_pembelian }}</td>
                             </tr>
                             <tr>
-                                <th width="30%" class="bg-light"></th>
-                                <td>{{ $data_barang->dataBarang->tahun_pembelian }}</td>
+                                <th width="30%" class="bg-light">Penerima</th>
+                                <td>{{ $data_barang->penerima }}</td>
                             </tr>
+                            
                             <tr>
                                 <th width="30%" class="bg-light">Status</th>
                                 <td>
@@ -53,9 +54,39 @@
                                 <th width="30%" class="bg-light">Foto</th>
                                 <td>
                                      <img alt="image" src="{{ asset('uploads/'. $data_barang->foto) }}" class="img-responsive" width="70%" data-toggle="tooltip">
-
                                 </td>
                             </tr>
+
+                            <!-- New fields added below -->
+                            @if ($data_barang->kondisi_barang === 4)
+                            <tr>
+                                <th width="30%" class="bg-light">Distribusi Barang</th>
+                                <td>{{ \Carbon\Carbon::parse($data_distribusi->dataDistribusi->tanggal_distribusi)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
+                            </tr>
+                            <tr>
+                                <th width="30%" class="bg-light">Ruangan</th>
+                                <td>{{ $data_distribusi->dataDistribusi->ruangan }}</td>
+                            </tr>
+                            <tr>
+                                <th width="30%" class="bg-light">Penanggung Jawab</th>
+                                <td>{{ $data_distribusi->dataDistribusi->penanggung_jawab }}</td>
+                            </tr>
+                            @elseif($data_barang->kondisi_barang === 3)
+                            <tr>
+                                <th width="30%" class="bg-light">Distribusi Barang</th>
+                                <td>
+                                    <div  class="badge badge-sm badge-warning">Barang Sedang di Pinjamkan</div>
+                                </td>
+                            </tr>
+                            @else
+                            <tr>
+                                <th width="30%" class="bg-light">Distribusi Barang</th>
+                                <td>
+                                    <div  class="badge badge-sm badge-danger">Barang Belum di Distribusikan</div>
+                                </td>
+                            </tr>
+                            @endif
+                            
 
                         </table>
                     </div>

@@ -371,8 +371,12 @@ class AdminController extends Controller
         
         
         $data_barang = DetailDataBarang::where('kode_barang',$id)->first();
+        $data_distribusi = DetailDistribusiBarang::where('id_barang',$data_barang->id)->first();
 
-        return view('pages/admin/detailUnitBarang')->with('data_barang', $data_barang);
+        return view('pages/admin/detailUnitBarang')->with([
+            'data_barang' => $data_barang,
+            'data_distribusi' => $data_distribusi
+        ]);
     }
     public function Peminjaman()
     {
@@ -633,7 +637,7 @@ class AdminController extends Controller
     public function Pengembalian($id)
     {
         $data_barang = DetailPeminjaman::where('id_peminjaman', $id)->get();
-
+        
         foreach($data_barang as $item){
             DetailDataBarang::find($item->id_barang)->update([
              'kondisi_barang' => 1
